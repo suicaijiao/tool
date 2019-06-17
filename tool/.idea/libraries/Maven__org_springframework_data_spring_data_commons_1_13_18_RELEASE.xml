@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.springframework.data:spring-data-commons:1.13.18.RELEASE">
+    <CLASSES>
+      <root url="jar://F:/apache-maven-3.5.3/repo/org/springframework/data/spring-data-commons/1.13.18.RELEASE/spring-data-commons-1.13.18.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://F:/apache-maven-3.5.3/repo/org/springframework/data/spring-data-commons/1.13.18.RELEASE/spring-data-commons-1.13.18.RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://F:/apache-maven-3.5.3/repo/org/springframework/data/spring-data-commons/1.13.18.RELEASE/spring-data-commons-1.13.18.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
