@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soonphe.portal.mapper.GmsHistoryMapper">
+
+    <!-- 查询用户当前游戏记录统计用于用户升级以及社群收益分配-->
+    <select id="selectDayUserGameStatistics"
+            resultType="com.soonphe.portal.vo.DayUserGameStatisticsVo"
+            parameterType="com.soonphe.portal.vo.QueryUserGameStatisticsVo"
+    >
+        SELECT
+          uid userId,
+          sum(h.reward_usdt) rewardUsdt ,
+          sum(h.reward_dot) rewardDot ,
+          ws.recommend_id  recommendId,
+          count(1) gameCount
+          FROM gms_history h
+          LEFT JOIN wms_wallet ws ON h.uid = ws.id
+        where
+        <![CDATA[
+          h.create_date > #{startDate}
+          and h.create_date < #{endDate}
+		]]>
+        GROUP BY uid ORDER BY uid desc
+        LIMIT #{pageIndex},#{pageSize}
+    </select>
+
+    <!-- 查询用户当前游戏记录统计用于用户升级以及社群收益分配-->
+    <select id="countDayUserGameStatistics"
+            resultType="java.lang.Integer"
+            parameterType="com.soonphe.portal.vo.QueryUserGameStatisticsVo"
+    >
+        SELECT
+          uid userId,
+          sum(reward_cny) rewardUsdt ,
+          sum(reward_ft) rewardDot ,
+          count(1) gameCount ,
+          create_date createDate
+          FROM gms_history
+        where
+        <![CDATA[
+          create_date > #{startDate}
+          and create_date < #{endDate}
+		]]>
+        GROUP BY uid ORDER BY uid desc
+    </select>
+</mapper>

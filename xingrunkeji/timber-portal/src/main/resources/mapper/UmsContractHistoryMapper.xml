@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soonphe.portal.mapper.UmsContractHistoryMapper">
+
+    <resultMap id="BaseResultMap" type="com.soonphe.portal.model.vo.GameContractVo">
+        <result property="sumRewardUSDT" column="sumRewardUSDT"/>
+        <result property="level" column="level"/>
+        <result property="specMax" column="specMax"/>
+
+    </resultMap>
+
+    <select id="contractGameReward" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT SUM(gh.reward_usdt) sumRewardUSDT,
+        c.`level` level,
+        c.spec_max specMax
+        FROM gms_history gh
+        left join ums_contract_history ch on ch.uid=gh.uid
+        LEFT join ums_contract c on ch.cid=c.id
+        where gh.uid=#{userId} and ch.status=1
+        <![CDATA[
+          and gh.create_date > ch.create_date
+          and gh.create_date< NOW()
+        ]]>
+        GROUP BY ch.cid
+    </select>
+</mapper>

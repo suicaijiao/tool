@@ -1,0 +1,68 @@
+﻿server:
+  port: 80
+
+spring:
+  profiles:
+    active: prod
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.soonphe.portal.entity
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.soonphe.portal.entity
+  #枚举类扫描，支持统配符 * 或者 ; 分割
+#  typeEnumsPackage: com.soonphe.portal.entity.constant
+  global-config:
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: id_worker
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: not_empty
+      #驼峰下划线转换
+      column-underline: true
+      #数据库大写下划线转换
+      #capital-mode: true
+      #逻辑删除配置——未删除0 已删除1
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+    #刷新mapper 调试神器
+    refresh: true
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+##输出sql 语句
+
+#指定日志配置文件
+#logging:
+#  config: classpath:logback-spring.xml
+#  path: D:/Logsss/
+#  level:
+#    root: warn
+#
+#logging:
+#  level:
+#    net.jy.redis.controller.testlog: off
+#    root: info
+
+logging:
+  level:
+    com.soonphe.portal.mapper: DEBUG
+
+
+
+
+
+
+
+
